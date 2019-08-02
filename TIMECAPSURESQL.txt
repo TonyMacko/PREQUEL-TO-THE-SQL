@@ -1,0 +1,18 @@
+SELECT Timecard.AssignmentID, Assignment.EmployeeID, JobID, OfficeID, TimecardStatus.TimecardStatus,SubmittedDateTime,TotalWorkDuration,ApprovalDateTime,RejectedDateTime,WeekendDate,WeekStartDate FROM Timecard
+JOIN TimecardStatus on TimecardStatus.TimecardStatusID = Timecard.TimecardStatusID
+JOIN TimecardWeek on TimecardWeek.TimecardWeekID = Timecard.TimecardWeekID
+join Assignment on Assignment.AssignmentID = Timecard.AssignmentID
+join EmployeeOffice on EmployeeOffice.EmployeeID = Assignment.EmployeeID
+
+
+
+SELECT TimecardEventQueue.TimecardID, Timecard.AssignmentID, Assignment.EmployeeID, JobID, OfficeID,QueueStatus.Description as queuestatus,
+EventType.Description as eventtype ,QueueMessage,TimecardEventQueue.LastModifiedDateTime 
+
+FROM TimecardEventQueue
+
+join Timecard on Timecard.TimecardID = TimecardEventQueue.TimecardID
+join Assignment on Assignment.AssignmentID = Timecard.AssignmentID
+join EmployeeOffice on EmployeeOffice.EmployeeID = Assignment.EmployeeID
+join EventType on EventType.EventTypeID = TimecardEventQueue.EventTypeID
+JOIN QueueStatus on QueueStatus.QueueStatusID = TimecardEventQueue.QueueStatusID
