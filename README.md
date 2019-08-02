@@ -1,3 +1,3 @@
 # SQL-SNIPS
 
-How we do querries
+How we do querries and scripts
